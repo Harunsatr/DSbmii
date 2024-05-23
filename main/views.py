@@ -25,27 +25,13 @@ def logic_predict(request):
             X_new = np.array([[age, height, weight, bmi]])
             prediction = model.predict(X_new)[0]
 
-            # Mapping nilai prediksi ke kategori yang diinginkan
-            if prediction == 0:
-                hasil = "Underweight"
-            elif prediction == 1:
-                hasil = "Normal Weight"
-            elif prediction == 2:
-                hasil = "Overweight"
-            elif prediction == 3:
-                hasil = "Obese Class 1"
-            elif prediction == 4:
-                hasil = "Obese Class 2"
-            else:
-                hasil = "Tidak Dapat Diklasifikasikan"
-            
+
             return render(request, 'pages/predict/hasil.html', {
                 'age': age,
                 'height': height,
                 'weight': weight,
                 'bmi': bmi,
-                'hasil': hasil,
-                'prediction': prediction
+                'hasil': prediction,
             })
         except (ValueError, TypeError) as e:
             return render(request, 'pages/predict/hasil.html', {
@@ -153,20 +139,6 @@ def predict(request):
             
             X_new = np.array([[age, height, weight, bmi]])
             prediction = model.predict(X_new)[0]
-            
-            # Mapping nilai prediksi ke kategori yang diinginkan
-            if prediction == "Underweight":
-                prediction = 0
-            elif prediction == "Normal Weight":
-                prediction = 1
-            elif prediction == "Overweight":
-                prediction = 2
-            elif prediction == "Obese Class 1":
-                prediction = 3
-            elif prediction == "Obese Class 2":
-                prediction = 4
-            else:
-                prediction = "Tidak Dapat Diklasifikasikan"
                 
         except (ValueError, TypeError):
             error_message = "Input harus berupa angka."
