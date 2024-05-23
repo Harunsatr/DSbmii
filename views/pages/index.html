@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload File CSV</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        .table-responsive {
+            max-height: 400px; /* Adjust as needed */
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upload File CSV</h1>
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" name="upload" class="btn btn-primary">Upload</button>
+        </form>
+
+        {% if table_html %}
+            <h2>Preview Data</h2>
+            <div class="table-responsive">
+                {{ table_html|safe }}
+            </div>
+            
+            <hr>
+
+            <form action="{% url 'predict' %}" method="post">
+                {% csrf_token %}
+                <label for="selected_label">Select Label/Class:</label>
+                <select name="selected_label" id="selected_label" class="form-control">
+                    {% for col in columns %}
+                        <option value="{{ col }}">{{ col }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" name="select_label" class="btn btn-secondary mt-2">Select Label</button>
+            </form>
+        {% endif %}
+
+        {% if selected_label %}
+            <h3>Selected Label: {{ selected_label }}</h3>
+            <form action="{% url 'predict' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="age">Age:</label>
+                    <input type="text" class="form-control" id="age" name="age" required>
+                </div>
+                <div class="form-group">
+                    <label for="height">Height:</label>
+                    <input type="text" class="form-control" id="height" name="height" required>
+                </div>
+                <div class="form-group">
+                    <label for="weight">Weight:</label>
+                    <input type="text" class="form-control" id="weight" name="weight" required>
+                </div>
+                <div class="form-group">
+                    <label for="bmi">BMI:</label>
+                    <input type="text" class="form-control" id="bmi" name="bmi" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Predict</button>
+            </form>
+        {% endif %}
+    </div>
+</body>
+</html>
