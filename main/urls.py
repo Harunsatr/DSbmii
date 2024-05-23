@@ -20,10 +20,13 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 from main import views
+from django.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
-    path('predict/', views.view_predict, name='predict'),
-    path('hasil-test/', views.logic_predict, name='logic_predict'),
+    path('', views.index2, name='index'),
+    # path('predict/', views.view_predict, name='predict'),
+    # path('hasil-test/', views.logic_predict, name='logic_predict'),
+    path('predict/', include('predict.urls')),
+    path('uploads/', include('uploads.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
