@@ -38,8 +38,7 @@ import joblib # type: ignore
 #                 'error_message': "Input harus berupa angka. Kesalahan: {}".format(e)
 #             })
 #     return render(request, 'pages/predict/hasil.html')
-# def view_predict(request):
-#     return render(request, 'pages/predict/predict.html')
+
 
 
 

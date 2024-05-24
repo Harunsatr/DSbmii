@@ -1,11 +1,39 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Prediction Result</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-    <H1>HORE BERHASIl</H1>
+    <div class="container">
+        <h1>Prediction Form</h1>
+        <form action="{% url 'predict:predict' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="text" class="form-control" id="age" name="age" required>
+            </div>
+            <div class="form-group">
+                <label for="height">Height:</label>
+                <input type="text" class="form-control" id="height" name="height" required>
+            </div>
+            <div class="form-group">
+                <label for="weight">Weight:</label>
+                <input type="text" class="form-control" id="weight" name="weight" required>
+            </div>
+            <div class="form-group">
+                <label for="bmi">BMI:</label>
+                <input type="text" class="form-control" id="bmi" name="bmi" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Predict</button>
+        </form>
+
+        <h3>Decision Tree Visualization</h3>
+        <img src="{{ image_url }}" alt="Decision Tree">
+
+    </div>
 </body>
 </html>

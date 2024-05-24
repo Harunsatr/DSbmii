@@ -25,7 +25,7 @@ from django.urls import include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index2, name='index'),
-    # path('predict/', views.view_predict, name='predict'),
+    # path('predict/hasil', views.logic_predict, name='logic_predict'),
     # path('hasil-test/', views.logic_predict, name='logic_predict'),
     path('predict/', include('predict.urls')),
     path('uploads/', include('uploads.urls')),
