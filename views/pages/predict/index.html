@@ -6,32 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prediction Result</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="{% static 'public/css/style.css' %}" />
 </head>
 <body>
-    <div class="container">
-        <h1>Prediction Form</h1>
+    <div class="container mt-5">
+        <h1 class="mb-4">Prediction Form</h1>
         <form action="{% url 'predict:predict' %}" method="post">
             {% csrf_token %}
             <div class="form-group">
-                <label for="age">Age:</label>
-                <input type="text" class="form-control" id="age" name="age" required>
+                <label for="age" class="font-weight-bold">Age (Years Old):</label>
+                <input type="text" class="form-control rounded" id="age" name="age" required>
             </div>
             <div class="form-group">
-                <label for="height">Height:</label>
-                <input type="text" class="form-control" id="height" name="height" required>
+                <label for="height" class="font-weight-bold">Height (Cm):</label>
+                <input type="text" class="form-control rounded" id="height" name="height" required>
             </div>
             <div class="form-group">
-                <label for="weight">Weight:</label>
-                <input type="text" class="form-control" id="weight" name="weight" required>
-            </div>
-            <div class="form-group">
-                <label for="bmi">BMI:</label>
-                <input type="text" class="form-control" id="bmi" name="bmi" required>
+                <label for="weight" class="font-weight-bold">Weight (Kg):</label>
+                <input type="text" class="form-control rounded" id="weight" name="weight" required>
             </div>
             <button type="submit" class="btn btn-primary">Predict</button>
         </form>
 
-        <h3>Decision Tree Visualization</h3>
+        <h3 class="mt-5">Decision Tree Visualization</h3>
         <img src="{{ image_url }}" alt="Decision Tree">
 
     </div>

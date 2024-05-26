@@ -62,7 +62,8 @@ def logic_predict(request, context={}):
             age = float(request.POST['age'])
             height = float(request.POST['height'])
             weight = float(request.POST['weight'])
-            bmi = float(request.POST['bmi'])
+            height_in_meters = height / 100
+            bmi = weight / (height_in_meters ** 2)
 
             # Load model from file
             model_path = os.path.join(settings.MEDIA_ROOT, 'decision_tree_model.joblib')

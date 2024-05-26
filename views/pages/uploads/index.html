@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,19 +13,20 @@
             overflow-y: auto;
         }
     </style>
+    <link rel="stylesheet" href="{% static 'public/css/style.css' %}" />
 </head>
 <body>
-    <div class="container">
+    <div class="container mt-3">
         <h1>Preview 10 Data</h1>
         {{ show_data | safe }}
     </div>
-    <div class="container">
+    <div class="container my-3">
         <form action="{% url 'predict:save_model' dataset_id=dataset_id %}" method="post">
             {% csrf_token %}
             <div class="form-group">
-                <label for="label">Pilih Kelas Label</label>
-                <select name="label" id="label">
-                    <option value="">__Silahkan PILIH__</option>
+                <label for="label" class="font-weight-bold">Pilih Kelas Label :</label>
+                <select name="label" id="label" class="mx-3 form-select-md">
+                    <option value="">SILAHKAN PILIH</option>
                     {% for label in columns %}
                         <option value="{{ label }}">{{ label }}</option>
                     {% endfor %}
